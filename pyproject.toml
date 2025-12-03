@@ -1,0 +1,12 @@
+[project]
+name = "geocontrolparental-api"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "aiosqlite>=0.21.0",
+    "fastapi[standard]>=0.123.5",
+    "passlib[bcrypt]>=1.7.4",
+    "sqlalchemy>=2.0.44",
+]
