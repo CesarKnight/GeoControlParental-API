@@ -26,5 +26,5 @@ docker compose up
 ### Ejecucion
 Correr dev:
 ```bash
-fastapi dev src/main.py
+fastapi dev app/main.py
 ```
