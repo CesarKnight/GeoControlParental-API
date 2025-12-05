@@ -20,9 +20,14 @@ def get_or_generate_jwt_secret():
         os.environ["SECRET_JWT"] = secret
     
     return secret
-
-DATABASE_URL = os.getenv("DATABASE_URL", "sqlite+aiosqlite:///./app/config/test.db")
 SECRET_JWT = get_or_generate_jwt_secret()
+
+POSTGRES_USER = os.getenv("POSTGRES_USER", "user")
+POSTGRES_PASSWORD = os.getenv("POSTGRES_PASSWORD", "password")
+POSTGRES_DB = os.getenv("POSTGRES_DB", "GeoControlDB")
+POSTGRES_HOST = os.getenv("POSTGRES_HOST", "localhost")
+POSTGRES_PORT = os.getenv("POSTGRES_PORT", "5432")
+DATABASE_URL = f"postgresql+asyncpg://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_HOST}:{POSTGRES_PORT}/{POSTGRES_DB}"
 
 # Configuración de debug
 DEBUG = os.getenv("DEBUG", "False").lower() == "true"

@@ -6,6 +6,7 @@ readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
     "aiosqlite>=0.21.0",
+    "asyncpg>=0.31.0",
     "fastapi-users[oauth,sqlalchemy]>=15.0.1",
     "fastapi[standard]>=0.123.5",
 ]
