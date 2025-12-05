@@ -1,9 +1,14 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
-
 from .config.db import create_db_and_tables
+# imports de fastapi-users
+from .controllers.user_controller import auth_backend, current_active_user, fastapi_users
+from .schemas.user_schemas import UserRead, UserCreate, UserUpdate
+# Importar routers
 from .routers import user_route
+from .routers import auth_route
+
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -25,7 +30,12 @@ app = FastAPI(
 )
 
 # Routers
-app.include_router(user_route.router)
+# User routers proveidos por fastapi-users
+app.include_router(fastapi_users.get_auth_router(auth_backend), prefix=auth_route.auth_router["prefix"], tags=auth_route.auth_router["tags"])
+app.include_router(fastapi_users.get_register_router(UserRead, UserCreate), prefix=auth_route.register_router["prefix"], tags=auth_route.register_router["tags"])
+app.include_router(fastapi_users.get_reset_password_router(), prefix=auth_route.reset_password_router["prefix"], tags=auth_route.reset_password_router["tags"])
+app.include_router(fastapi_users.get_verify_router(UserRead), prefix=auth_route.verify_router["prefix"], tags=auth_route.verify_router["tags"])
+app.include_router(fastapi_users.get_users_router(UserRead, UserUpdate), prefix=user_route.users_router["prefix"], tags=user_route.users_router["tags"])
 
 app.add_middleware(
     CORSMiddleware,

@@ -4,8 +4,10 @@ from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine, async_sess
 from sqlalchemy.orm import DeclarativeBase
 import logging
 
+from ..config import consts
+
 # Todo construir la URL de la base de datos desde variables de entorno
-DATABASE_URL = os.getenv("DATABASE_URL", "sqlite+aiosqlite:///./app/config/test.db")
+DATABASE_URL = consts.DATABASE_URL
 
 logger = logging.getLogger(__name__)
 
